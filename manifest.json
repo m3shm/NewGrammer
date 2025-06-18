@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "Gemini Writer Assistant",
+  "version": "1.0",
+  "description": "Your AI-powered writing assistant for grammar, tone, style, and more, powered by Gemini.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["overlay.css"]
+    }
+  ],
+  "action": {
+    "default_popup": "options.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    {
+      "resources": ["overlay.html", "icons/*.png"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

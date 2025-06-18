@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Writer Overlay</title>
+    <link rel="stylesheet" href="overlay.css">
+</head>
+<body>
+    <div id="container">
+        <!-- Loading State -->
+        <div id="loading-state" class="state">
+            <div class="spinner"></div>
+            <p>Gemini is thinking...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="error-state" class="state" style="display: none;">
+            <h3>Oops! 🥺</h3>
+            <p id="error-message">Something went wrong.</p>
+        </div>
+
+        <!-- Data State -->
+        <div id="data-state" class="state" style="display: none;">
+            <header>
+                <div class="logo">
+                    <img src="icons/icon48.png" alt="logo" width="24" height="24">
+                    <h4>Gemini Writer</h4>
+                </div>
+                <button id="close-btn" title="Close">&times;</button>
+            </header>
+
+            <div class="content">
+                <!-- Translation -->
+                <div id="translation-section" class="section" style="display: none;">
+                    <h5>Translation (from Non-English)</h5>
+                    <p id="translation-output" class="box"></p>
+                </div>
+
+                <!-- Summary -->
+                <div id="summary-section" class="section" style="display: none;">
+                    <h5>Summary</h5>
+                    <p id="summary-output" class="box"></p>
+                </div>
+
+                <!-- Corrections -->
+                <div id="corrections-section" class="section">
+                    <!-- MODIFIED: Added a header to contain the title and the new button -->
+                    <div class="section-header">
+                        <h5>Corrections</h5>
+                        <button id="apply-all-btn" class="apply-all-btn">Apply All</button>
+                    </div>
+                    <div id="corrections-list"></div>
+                </div>
+
+                <!-- Tone Rewrites -->
+                <div id="rewrites-section" class="section" style="display: none;">
+                    <h5>Tone Rewrites</h5>
+                    <div class="tabs">
+                        <button class="tab-link active" data-tone="formal">Formal</button>
+                        <button class="tab-link" data-tone="friendly">Friendly</button>
+                        <button class="tab-link" data-tone="concise">Concise</button>
+                    </div>
+                    <div id="rewrite-output" class="box"></div>
+                     <button class="apply-rewrite-btn">Use This Version</button>
+                </div>
+                
+                <!-- Plagiarism -->
+                <div id="plagiarism-section" class="section" style="display: none;">
+                    <h5>Plagiarism Score</h5>
+                    <div class="plagiarism-bar-container">
+                        <div id="plagiarism-bar" style="width: 0%;"></div>
+                    </div>
+                    <span id="plagiarism-text">0% Likelihood</span>
+                </div>
+
+                <!-- Flashcards -->
+                <div id="flashcards-section" class="section" style="display: none;">
+                    <h5>Vocabulary Boost</h5>
+                    <div id="flashcards-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="overlay.js"></script>
+</body>
+</html>
