@@ -189,3 +189,10 @@ async function updateStats(jsonData) {
 chrome.runtime.onInstalled.addListener(() => {
   console.log("Gemini Writer Assistant has been installed! 🎉");
 });
+
+// Allow Node.js testing by exporting functions when module is available
+if (typeof module !== 'undefined') {
+  module.exports = {
+    parseGeminiResponse,
+  };
+}
