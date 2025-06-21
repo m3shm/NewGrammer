@@ -7,6 +7,7 @@
 console.log("Gemini Writer Assistant content script loaded. ✨");
 
 let activeElement = null;
+let keyupListener = null;
 let debounceTimer;
 const DEBOUNCE_DELAY = 800; // ms
 let overlayFrame = null;
@@ -86,17 +87,24 @@ function hideOverlay() {
 document.addEventListener('focusin', (e) => {
   const element = e.target;
   if (element.tagName === 'TEXTAREA' || element.isContentEditable) {
+    if (activeElement && keyupListener) {
+      activeElement.removeEventListener('keyup', keyupListener);
+    }
     activeElement = element;
-    activeElement.addEventListener('keyup', () => debouncedProcessText(activeElement));
+    keyupListener = () => debouncedProcessText(activeElement);
+    activeElement.addEventListener('keyup', keyupListener);
   }
 });
 
 document.addEventListener('focusout', (e) => {
+  if (e.target === activeElement && keyupListener) {
+    activeElement.removeEventListener('keyup', keyupListener);
+    keyupListener = null;
+    activeElement = null;
+  }
   setTimeout(() => {
-    if (document.activeElement !== activeElement && document.activeElement !== overlayFrame) {
-        // We're keeping this commented for now to prevent aggressive hiding
+    if (document.activeElement !== overlayFrame) {
         // hideOverlay();
-        // activeElement = null;
     }
   }, 200);
 });
